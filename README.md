@@ -1,71 +1,68 @@
-# react-set-prefixer README
+# React-autoState
 
-This is the README for your extension "react-set-prefixer". After writing up a brief description, we recommend including the following sections.
+A VSCode extension that helps you efficiently manage React state variable names and their setter functions. This extension streamlines the process of creating useState hooks and converting between state variables and their setters.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+### 1. add Setter Prefix
 
-For example if there is an image subfolder under your extension project workspace:
+- When: Press `Ctrl+Alt+S` / `Cmd+Alt+S`
+- Input: Selected state name (e.g., `isModalOpen`)
+- Result: Copies `setIsModalOpen`
 
-\!\[feature X\]\(images/feature-x.png\)
+### 2. Remove Setter Prefix
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+- When: Press `Ctrl+Alt+R` / `Cmd+Alt+R`
+- Input: Selected setter name (e.g., `setIsModalOpen`)
+- Result: Copies `isModalOpen`
 
-## Requirements
+### 3. Setter Auto-completion
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- When: Typing state name followed by comma
+- Input: `count [count,`
+- Result: Suggests `setCount`
 
-## Extension Settings
+### 4. useState Generation
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+- Execute command on current cursor line:
+  ```
+  stateName
+  stateName^initialValue
+  stateName^type^initialValue
+  ```
+- Examples:
 
-For example:
+  ```typescript
+  // count^0
+  const [count, setCount] = useState(0);
 
-This extension contributes the following settings:
+  // count^number^0
+  const [count, setCount] = useState<number>(0);
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+  // count^number|undefined^0
+  const [count, setCount] = useState<number | undefined>(0);
+  ```
 
-## Known Issues
+## Installation
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+1. Open VSCode
+2. Go to Extensions (Ctrl+Shift+X)
+3. Search for "React State Prefix Manager"
+4. Click Install
+5. Reload VSCode
 
-## Release Notes
+## Usage
 
-Users appreciate release notes as you update your extension.
+### Keyboard Shortcuts
 
-### 1.0.0
+| Command             | Windows/Linux | Mac         | Action                           |
+| ------------------- | ------------- | ----------- | -------------------------------- |
+| Add 'set' Prefix    | Ctrl+Shift+S  | Cmd+Shift+S | Adds 'set' prefix to variable    |
+| Remove 'set' Prefix | Ctrl+Shift+R  | Cmd+Shift+R | Removes 'set' prefix from setter |
+| Create useState     | Ctrl+Shift+U  | Cmd+Shift+U | Creates complete useState hook   |
 
-Initial release of ...
+You can customize these shortcuts in VSCode's Keyboard Shortcuts settings.
 
-### 1.0.1
+## Contributing
 
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+If you'd like to contribute to this extension, please visit [repository](https://github.com/daangnkim/React-autoState)
