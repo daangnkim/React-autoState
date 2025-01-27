@@ -1,35 +1,102 @@
 {
-  "name": "react-set-prefixer",
-  "displayName": "react-set-prefixer",
-  "description": "Transform React useState variables and setters with ease (isOpen ↔ setIsOpen)",
-  "version": "0.0.1",
+  "name": "React-autoState",
+  "displayName": "React autoState",
+  "icon": "images/icon.png",
+  "description": "Smart React useState helper: Convert between state and setters, auto-complete pairs, and generate useState snippets instantly",
+  "publisher": "daangnkim",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/daangnkim/React-autoState"
+  },
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.96.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "keywords": [
+    "react",
+    "autoState",
+    "useState",
+    "react autoState",
+    "react useState"
+  ],
+  "activationEvents": [
+    "onLanguage:javascript",
+    "onLanguage:javascriptreact",
+    "onLanguage:typescript",
+    "onLanguage:typescriptreact"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
+    "languages": [
+      {
+        "id": "typescriptreact",
+        "aliases": [
+          "TypeScript React",
+          "tsx"
+        ],
+        "extensions": [
+          ".tsx",
+          ".ts"
+        ]
+      },
+      {
+        "id": "javascriptreact",
+        "aliases": [
+          "JavaScript React",
+          "jsx"
+        ],
+        "extensions": [
+          ".jsx",
+          ".js"
+        ]
+      }
+    ],
     "commands": [
       {
-        "command": "react-set-prefixer.helloWorld",
-        "title": "Hello World"
+        "command": "React-autoState.addSetPrefix",
+        "title": "Copy with Set Prefix"
+      },
+      {
+        "command": "React-autoState.removeSetPrefix",
+        "title": "Copy without Set Prefix"
+      },
+      {
+        "command": "React-autoState.createUseState",
+        "title": "Create useState"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "React-autoState.addSetPrefix",
+        "key": "ctrl+shift+s",
+        "mac": "cmd+shift+s",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "React-autoState.removeSetPrefix",
+        "key": "ctrl+shift+r",
+        "mac": "cmd+shift+r",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "React-autoState.createUseState",
+        "key": "ctrl+shift+u",
+        "mac": "cmd+shift+u",
+        "when": "editorTextFocus"
       }
     ]
   },
   "scripts": {
-    "vscode:prepublish": "pnpm run package",
-    "compile": "pnpm run check-types && pnpm run lint && node esbuild.js",
-    "watch": "npm-run-all -p watch:*",
-    "watch:esbuild": "node esbuild.js --watch",
-    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
-    "package": "pnpm run check-types && pnpm run lint && node esbuild.js --production",
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
-    "pretest": "pnpm run compile-tests && pnpm run compile && pnpm run lint",
-    "check-types": "tsc --noEmit",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
     "lint": "eslint src",
     "test": "vscode-test"
   },
@@ -40,9 +107,10 @@
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
     "eslint": "^9.16.0",
-    "esbuild": "^0.24.0",
-    "npm-run-all": "^4.1.5",
     "typescript": "^5.7.2",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
     "@vscode/test-cli": "^0.0.10",
     "@vscode/test-electron": "^2.4.1"
   }
